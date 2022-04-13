@@ -3,7 +3,7 @@
   margin: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .container-wrapper {
@@ -25,7 +25,9 @@
 }
 
 .container {
-  width: 450px;
+  max-width: 450px;
+  width: 100%;
+  padding: 0 15px;
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -59,8 +61,8 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-transition: .4s all;
-  transition: .4s all;
+  -webkit-transition: 0.4s all;
+  transition: 0.4s all;
   opacity: 100%;
 }
 
@@ -123,16 +125,16 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-transition: .3s all;
-  transition: .3s all;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
   cursor: pointer;
   border-radius: 8px;
   padding: 4px;
   margin: 7px;
 }
 
-.player-sign-selection > div .X-logo img,
-.player-sign-selection > div .O-logo img {
+.player-sign-selection > div .X-logo svg,
+.player-sign-selection > div .O-logo svg {
   height: 30px;
 }
 
@@ -169,8 +171,8 @@
   margin: 9px;
   font-size: 20px;
   font-weight: bold;
-  -webkit-transition: .3s all;
-  transition: .3s all;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
   -webkit-box-shadow: 0px 8px 0px rgba(189, 189, 189, 0.219);
           box-shadow: 0px 8px 0px rgba(189, 189, 189, 0.219);
   cursor: pointer;
@@ -214,8 +216,8 @@
   position: absolute;
   z-index: -1;
   border-radius: 10px;
-  -webkit-transition: .6s all;
-  transition: .6s all;
+  -webkit-transition: 0.6s all;
+  transition: 0.6s all;
 }
 
 .game > * {
@@ -264,6 +266,22 @@
   padding: 2rem;
 }
 
+.game-card.x.win {
+  background-color: #31c3bd;
+}
+
+.game-card.x.win::before {
+  content: url("../images/SVG/icon-x-win.svg");
+}
+
+.game-card.o.win {
+  background-color: #f2b137;
+}
+
+.game-card.o.win::before {
+  content: url("../images/SVG/icon-o-win.svg");
+}
+
 .game-menu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -279,8 +297,8 @@
 
 .game-restart {
   background-color: #a8bfc9;
-  -webkit-transition: .3s all;
-  transition: .3s all;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
   padding: 13px 23px;
   border-radius: 5px;
   -webkit-box-shadow: inset 0 -0.4rem 0 #6991a2;
@@ -340,7 +358,8 @@
   border-radius: 8px;
 }
 
-.game-info > div p:last-child {
+.game-info > div span {
+  display: block;
   font-weight: bold;
   font-size: 20px;
 }
@@ -355,5 +374,108 @@
 
 .game-info .ties-score {
   background-color: #a8bfc9;
+}
+
+.modal {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 10;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal .overlay {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.4;
+}
+
+.modal > div {
+  width: 100%;
+  height: 250px;
+  background-color: #1f3641;
+}
+
+.modal > div:last-child > div {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px 0;
+}
+
+.modal .winner-title {
+  color: #a8bfc9;
+  font-weight: bold;
+}
+
+.modal .winner-details {
+  margin: 10px 0;
+}
+
+.modal .quite-btn {
+  background-color: #a8bfc9;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+}
+
+.modal .quite-btn:hover {
+  background-color: #dbe8ed;
+}
+
+.modal .next-round-btn {
+  background-color: #f2b137;
+}
+
+.modal .next-round-btn:hover {
+  background-color: #ffc860;
+}
+
+.modal .next-round-btn,
+.modal .quite-btn {
+  padding: 20px;
+  -webkit-transition: 0.3s all;
+  transition: 0.3s all;
+  border: none;
+  cursor: pointer;
+  margin: 0 4px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 580px) {
+  .game {
+    padding: 0 15px;
+  }
+  .game .game-cards-container {
+    -ms-grid-columns: (minmax(80px, 1fr))[3];
+        grid-template-columns: repeat(3, minmax(80px, 1fr));
+    -ms-grid-rows: (minmax(80px, 1fr))[3];
+        grid-template-rows: repeat(3, minmax(80px, 1fr));
+  }
 }
 /*# sourceMappingURL=main.css.map */
